@@ -3,8 +3,10 @@ import axios from "axios"
 import { Navigate } from 'react-router-dom'
 
 import { Box } from "@mui/material"
-import {Button} from '@mui/material'
+import { Button } from '@mui/material'
 import ModalRegisterPet from './ModalRegisterPet'
+
+import NavBar from './NavBar'
 
 const Panel = () => {
 
@@ -40,29 +42,33 @@ const Panel = () => {
 
 
   return (
-    <Box display="flex" flexDirection="column" gap="20px"  p="30px">
-      <Box>
-       <ModalRegisterPet />
-      </Box>
+    <>
 
-      <Box display="flex" gap="15px">
-      {
-        pets?.map(pet => {
+      <NavBar />
+      <Box display="flex" flexDirection="column" gap="20px" p="30px">
+        <Box>
+          <ModalRegisterPet setPets={setPets}/>
+        </Box>
 
-          return <Box key={pet.id} width="250px" height="250px" display="flex" flexDirection="column" gap="10px">
-            <Box component="img" src={pet.image} width="100%" borderRadius="10px"  />
-    
-            <p>Nombre: {pet.name}</p>
-            <p>Edad: {pet.age}</p>
-            <p>Tamaño: {pet.size}</p>
-            <Button  fullWidth variant='contained' color='warning'>
-              Adoptar
-            </Button>
-          </Box>
-        })
-      }
+        <Box display="flex" gap="15px">
+          {
+            pets?.map(pet => {
+
+              return <Box key={pet.id} width="250px" height="250px" display="flex" flexDirection="column" gap="10px">
+                <Box component="img" src={pet.image} width="100%" borderRadius="10px" />
+
+                <p>Nombre: {pet.name}</p>
+                <p>Edad: {pet.age}</p>
+                <p>Tamaño: {pet.size}</p>
+                <Button fullWidth variant='contained' color='warning'>
+                  Adoptar
+                </Button>
+              </Box>
+            })
+          }
+        </Box>
       </Box>
-    </Box>
+    </>
   )
 }
 

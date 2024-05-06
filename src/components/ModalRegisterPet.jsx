@@ -20,7 +20,7 @@ const style = {
     p: 4,
 };
 
-export default function ModalRegisterPet() {
+export default function ModalRegisterPet({setPets}) {
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -39,7 +39,11 @@ export default function ModalRegisterPet() {
 
        try {
         const response = await axios.post('http://localhost:4000/pet/create', data)
-        console.log("Todo correcto")
+
+        const responsePets = await axios.get('http://localhost:4000/pet/all');
+
+        setPets(responsePets.data.allPets)
+        handleClose()
        } catch (error) {
         console.log(error)
        }
